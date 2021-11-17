@@ -4,8 +4,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import ch.zli.m223.punchclock.domain.Entry;
 import ch.zli.m223.punchclock.domain.User;
 import ch.zli.m223.punchclock.service.AuthenticationService;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 
 @Path("/auth")
 public class AuthentificationController {
@@ -21,5 +23,13 @@ public class AuthentificationController {
         } else {
             throw new NotAuthorizedException("User "+ user.getUsername()+" was not found");
         }
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Add a new User", description = "The newly created User is returned. The id may not be passed.")
+    public User add(User user) {
+        return authenticationService.createUser(user);
     }
 }

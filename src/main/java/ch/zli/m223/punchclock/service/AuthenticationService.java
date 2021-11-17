@@ -7,7 +7,9 @@ import java.util.HashSet;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
+import ch.zli.m223.punchclock.domain.Entry;
 import io.smallrye.jwt.build.Jwt;
 import org.eclipse.microprofile.jwt.Claims;
 
@@ -38,4 +40,9 @@ public class AuthenticationService {
         return (long)result == 1;
     }
 
+    @Transactional
+    public User createUser(User user) {
+        entityManager.persist(user);
+        return user;
+    }
 }
