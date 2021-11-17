@@ -1,9 +1,12 @@
 package ch.zli.m223.punchclock.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.*;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class User {
@@ -16,6 +19,14 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name="admin_id", nullable = false)
+    private Admin admin;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Entry> entries;
 
     public Long getId() {
         return id;
