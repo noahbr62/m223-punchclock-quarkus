@@ -35,6 +35,7 @@ public class EntryService {
         return entityManager.find(Entry.class, id);
     }
 
+    @Transactional
     public void delete(Long id) {
         Entry entryToDelete = getSingleEntry(id);
         entityManager.remove(entryToDelete);
