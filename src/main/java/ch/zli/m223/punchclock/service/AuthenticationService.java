@@ -62,7 +62,7 @@ public class AuthenticationService {
         return entityManager.find(User.class, id);
     }
 
-
+    @Transactional
     public void updateEntry(User user) {
         entityManager.merge(user);
     }
