@@ -44,4 +44,21 @@ public class AuthentificationController {
     public List<User> list() {
         return authenticationService.findAll();
     }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Authenticated
+    @Operation(summary = "Gets one User", description = "")
+    @Path("/{id}")
+    public User getSingleUser(@PathParam("id") Long id) {
+        return authenticationService.getSingleUser(id);
+    }
+
+    @DELETE
+    @Authenticated
+    @Path("/{id}")
+    @Operation(summary = "Delete a single User", description = "")
+    public void deleteEntry(@PathParam("id") Long id) {
+        authenticationService.delete(id);
+    }
 }

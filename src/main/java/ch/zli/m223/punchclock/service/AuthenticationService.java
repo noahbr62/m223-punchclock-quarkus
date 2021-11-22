@@ -48,7 +48,17 @@ public class AuthenticationService {
     }
 
     public List<User> findAll() {
-        var query = entityManager.createQuery("FROM user");
+        var query = entityManager.createQuery("FROM User");
         return query.getResultList();
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        User entryToDelete = getSingleUser(id);
+        entityManager.remove(entryToDelete);
+    }
+
+    public User getSingleUser(Long id) {
+        return entityManager.find(User.class, id);
     }
 }
