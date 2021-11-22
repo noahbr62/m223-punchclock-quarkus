@@ -61,4 +61,11 @@ public class AuthentificationController {
     public void deleteEntry(@PathParam("id") Long id) {
         authenticationService.delete(id);
     }
+
+    @PUT
+    @Authenticated
+    @Operation(summary = "Edit a single User", description = "")
+    public void update(User user) {
+        authenticationService.updateEntry(user);
+    }
 }

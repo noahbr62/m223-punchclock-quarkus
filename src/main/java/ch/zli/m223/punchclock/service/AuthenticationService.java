@@ -61,4 +61,9 @@ public class AuthenticationService {
     public User getSingleUser(Long id) {
         return entityManager.find(User.class, id);
     }
+
+
+    public void updateEntry(User user) {
+        entityManager.merge(user);
+    }
 }
