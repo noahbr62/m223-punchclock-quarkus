@@ -42,7 +42,7 @@ public class AuthenticationService {
 
     @Transactional
     public User createUser(User user) {
-        entityManager.persist(user);
+        entityManager.merge(user);
         return user;
     }
 }

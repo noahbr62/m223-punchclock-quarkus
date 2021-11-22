@@ -51,5 +51,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
     
 }
