@@ -15,6 +15,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import io.quarkus.security.Authenticated;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
@@ -30,6 +31,7 @@ public class EntryController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Authenticated
     @Operation(summary = "List all Entries", description = "")
     public List<Entry> list() {
         return entryService.findAll();
@@ -37,6 +39,7 @@ public class EntryController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Authenticated
     @Operation(summary = "Gets one entry", description = "")
     @Path("/{id}")
     public Entry getSingleEntry(@PathParam("id") Long id) {
@@ -46,18 +49,23 @@ public class EntryController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Authenticated
     @Operation(summary = "Add a new Entry", description = "The newly created entry is returned. The id may not be passed.")
     public Entry add(Entry entry) {
         return entryService.createEntry(entry);
     }
 
     @DELETE
+    @Authenticated
     @Path("/{id}")
+    @Operation(summary = "Delete a single Entry", description = "")
     public void deleteEntry(@PathParam("id") Long id) {
         entryService.delete(id);
     }
 
     @PUT
+    @Authenticated
+    @Operation(summary = "Edit a single Entry", description = "")
     public void update(Entry entry) {
         entryService.updateEntry(entry);
     }

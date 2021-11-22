@@ -16,7 +16,8 @@ public class AuthentificationController {
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Check the existence of a user", description = "A Token will be returned")
     public String login(User user ){
         if(authenticationService.checkIfUserExists(user)) {
             return authenticationService.generateValidJwtToken(user.getUsername());
