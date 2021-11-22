@@ -9,10 +9,12 @@ import ch.zli.m223.punchclock.domain.User;
 import ch.zli.m223.punchclock.service.AuthenticationService;
 import io.quarkus.security.Authenticated;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.List;
 
 @Path("/auth")
+@Tag(name = "Auth", description = "Handling of Users")
 public class AuthentificationController {
     @Inject
     AuthenticationService authenticationService;
