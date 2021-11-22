@@ -3,6 +3,7 @@ package ch.zli.m223.punchclock.service;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -44,5 +45,10 @@ public class AuthenticationService {
     public User createUser(User user) {
         entityManager.merge(user);
         return user;
+    }
+
+    public List<User> findAll() {
+        var query = entityManager.createQuery("FROM user");
+        return query.getResultList();
     }
 }
